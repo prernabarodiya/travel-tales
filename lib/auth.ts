@@ -1,8 +1,10 @@
-import { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, User as NextAuthUser, Account, Profile, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connect } from "./connect"
 import User from "@/models/user"
+import { JWT } from "next-auth/jwt";
 import bcrypt from "bcryptjs";
+import GoogleProvider from "next-auth/providers/google"
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -39,24 +41,64 @@ export const authOptions: NextAuthOptions = {
                     throw error
                 }
             }
-        })
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        }),
     ], callbacks: {
-        async jwt({ token, user }) {
-            if (user) {
-                token.id = user.id
+        async signIn({ user, account, profile }: { user: NextAuthUser; account: Account | null; profile?: Profile }) {
+            await connect();
+            console.log("Sign In callback called");
+
+            if (!account) {
+                console.log("Account is null");
+                return false;
             }
-            return token
+
+            if (account.provider === "google") {
+                try {
+                    const existingUser = await User.findOne({ email: user.email });
+                    console.log("existing user", existingUser)
+                    if (!existingUser) {
+                        const newUser = new User({ email: user.email, profileName:user.name,password:user.email });
+                        await newUser.save();
+                        console.log("New user created:", newUser);
+                    }
+                    return true;
+                } catch (error) {
+                    console.error("Error during sign-in:", error);
+                    return false;
+                }
+            }
+
+            return true;
         },
-        async session({ session, token }) {
-            if (token && session.user) {
-                session.user.id = token.id as string
+
+        async jwt({ token, user }: { token: JWT; user?: NextAuthUser }) {
+
+            if (user) {
+                token.id = user.id;
+                token.email = user.email;
+                token.name = user.name;
             }
-            return session
-        }
+            return token;
+        },
+        async session({ session, token }: { session: Session; token: JWT }) {
+            if (token) {
+                session.user = {
+                    id: token.id as string,         
+                    name: token.name || null,
+                    email: token.email || null,
+                    image: token.picture || null    
+                };
+            }
+            return session;
+        },
     }, pages: {
         signIn: "/login",
-        error: "/login"
-    }, session: { 
+        error: "/error"
+    }, session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60
     }, secret: process.env.AUTH_SECRET

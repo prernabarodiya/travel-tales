@@ -2,6 +2,8 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { signIn } from "next-auth/react";
+import Image from "next/image";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -26,7 +28,7 @@ export default function RegisterPage() {
       });
 
       if (response.status === 200) {
-        router.push("/login");
+        router.push("/dashboard");
       }
     } catch (err: any) {
       setError(err?.response?.data?.error || "Something went wrong");
@@ -80,6 +82,20 @@ export default function RegisterPage() {
             Login
           </a>
         </p>
+         {/* Google Auth Button */}
+              <button
+                onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+                className="flex items-center justify-center space-x-2 w-full mt-4 rounded-xl
+                dark:bg-gray-700 hover:bg-red-400 dark:hover:bg-gray-500 text-white"
+              >
+                {/* <Image
+                  src="/google.svg"
+                  alt="google logomark"
+                  width={25}
+                  height={25}
+                /> */}
+                <span>Continue with Google</span>
+              </button>
       </div>
     </div>
   );
