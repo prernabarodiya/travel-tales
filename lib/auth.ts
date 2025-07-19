@@ -61,7 +61,7 @@ export const authOptions: NextAuthOptions = {
                     const existingUser = await User.findOne({ email: user.email });
                     console.log("existing user", existingUser)
                     if (!existingUser) {
-                        const newUser = new User({ email: user.email, profileName:user.name,password:user.email });
+                        const newUser = new User({ email: user.email, profileName: user.name, password: user.email });
                         await newUser.save();
                         console.log("New user created:", newUser);
                     }
@@ -78,19 +78,27 @@ export const authOptions: NextAuthOptions = {
         async jwt({ token, user }: { token: JWT; user?: NextAuthUser }) {
 
             if (user) {
-                token.id = user.id;
                 token.email = user.email;
-                token.name = user.name;
+
+                // Fetch MongoDB user using email to get the _id
+                await connect();
+                const dbUser = await User.findOne({ email: user.email });
+
+                if (dbUser) {
+                    token.id = dbUser._id.toString();  // Store Mongo _id
+                    token.name = dbUser.profileName || user.name;
+                    token.picture = dbUser.image || user.image || null;
+                }
             }
             return token;
         },
         async session({ session, token }: { session: Session; token: JWT }) {
             if (token) {
                 session.user = {
-                    id: token.id as string,         
+                    id: token.id as string,
                     name: token.name || null,
                     email: token.email || null,
-                    image: token.picture || null    
+                    image: token.picture || null
                 };
             }
             return session;

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+
+@import "uploadthing/tw/v4";
+@import "../node_modules/@uploadthing/react/dist/index.css";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

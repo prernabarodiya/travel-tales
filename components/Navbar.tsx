@@ -37,12 +37,18 @@ export default function Navbar() {
                 >
                     {userNameOrEmail}
                 </button>
-                <Link href="/add-story" className="text-gray-800 font-medium hover:text-blue-600">
+                <Link href="/addStory" className="text-gray-800 font-medium hover:text-blue-600">
                     Add Story
                 </Link>
-                <Link href="/your-stories" className="text-gray-800 font-medium hover:text-blue-600">
+                <Link href="/getMyTales" className="text-gray-800 font-medium hover:text-blue-600">
                     Your Stories
                 </Link>
+                <button
+                            onClick={() => signOut({ callbackUrl: "/" })}
+                            className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                        >
+                            Logout
+                        </button>
 
                 {menuOpen && (
                     <div className="absolute right-0 top-full mt-2 w-40 bg-white border rounded-lg shadow-md z-50">
