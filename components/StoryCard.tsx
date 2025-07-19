@@ -17,6 +17,9 @@ export default function StoryCard(story: Story) {
         <p className="text-gray-600 text-sm line-clamp-3">
           {story.details}
         </p>
+        <p className="text-gray-800 text-sm line-clamp-3">
+          By : {story.authorId.profileName || story.authorId.email}
+        </p>
       </div>
     </div>
   );

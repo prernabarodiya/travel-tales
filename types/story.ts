@@ -1,6 +1,10 @@
-export default interface Story{
-    location:string,
-    details:string,
-    authorId:string,
-    images:string[]
+export default interface Story {
+    location: string,
+    details: string,
+    authorId: {
+        profileName: string,
+        email: string
+    },
+
+    images: string[]
 }

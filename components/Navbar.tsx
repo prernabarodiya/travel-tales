@@ -2,90 +2,60 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { useState } from "react";
 
 export default function Navbar() {
     const { data: session } = useSession();
-    const [menuOpen, setMenuOpen] = useState(false);
-
     const userNameOrEmail = session?.user?.name || session?.user?.email || "User";
 
     return (
-       <div className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
-    {/* Left - Brand */}
-    <div>
-        <Link href="/" className="text-xl font-bold text-blue-600">
-            TravelTales
-        </Link>
-    </div>
+        <div className="bg-gray-900 shadow-md px-6 py-4 flex justify-between items-center border-b border-gray-700">
 
-    {/* Right - Nav Links + Auth */}
-    <div className="flex items-center space-x-6 ">
-        <Link href="/" className="text-gray-800 font-medium hover:text-blue-600">
-            Home
-        </Link>
-        <Link href="/explore" className="text-gray-800 font-medium hover:text-blue-600">
-            Explore
-        </Link>
-
-        {session ? (
-            <>
-            <div className="flex justify-center gap-4">
-                <button
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    className="text-gray-800 font-medium hover:text-blue-600"
-                >
-                    {userNameOrEmail}
-                </button>
-                <Link href="/addStory" className="text-gray-800 font-medium hover:text-blue-600">
-                    Add Story
+            {/* Brand */}
+            <div>
+                <Link href="/" className="text-xl font-bold text-blue-100">
+                    TravelTales
                 </Link>
-                <Link href="/getMyTales" className="text-gray-800 font-medium hover:text-blue-600">
-                    Your Stories
-                </Link>
-                <button
-                            onClick={() => signOut({ callbackUrl: "/" })}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
-                        >
-                            Logout
-                        </button>
+            </div>
 
-                {menuOpen && (
-                    <div className="absolute right-0 top-full mt-2 w-40 bg-white border rounded-lg shadow-md z-50">
-                        <Link
-                            href="/profile"
-                            className="block px-4 py-2 hover:bg-gray-100 text-gray-700"
-                        >
-                            Profile
+            {/* Navigation Links */}
+            <div className="flex items-center space-x-6 text-blue-100">
+                <Link href="/" className="text-gray-100 font-medium hover:text-blue-500">
+                    Home
+                </Link>
+                <Link href="/explore" className="text-gray-100 font-medium hover:text-blue-500">
+                    Explore
+                </Link>
+
+                {session ? (
+                    <>
+                       
+                        <Link href="/addStory" className="text-gray-100 font-medium hover:text-blue-500">
+                            Add Story
+                        </Link>
+                        <Link href="/getMyTales" className="text-gray-100 font-medium hover:text-blue-500">
+                            Your Stories
+                        </Link>
+                         <Link href="/profile" className="text-gray-100 font-medium hover:text-blue-500">
+                            {userNameOrEmail}
                         </Link>
                         <button
                             onClick={() => signOut({ callbackUrl: "/" })}
-                            className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                            className="text-red-500 hover:text-red-700 font-medium"
                         >
                             Logout
                         </button>
-                    </div>
-                    
-                )}</div>
-            </>
-        ) : (
-            <>
-                <Link
-                    href="/login"
-                    className="text-gray-800 font-medium hover:text-blue-600"
-                >
-                    Login
-                </Link>
-                <Link
-                    href="/register"
-                    className="text-gray-800 font-medium hover:text-blue-600"
-                >
-                    Register
-                </Link>
-            </>
-        )}
-    </div>
-</div>
-
+                    </>
+                ) : (
+                    <>
+                        <Link href="/login" className="text-gray-100 font-medium hover:text-blue-500">
+                            Login
+                        </Link>
+                        <Link href="/register" className="text-gray-100 font-medium hover:text-blue-500">
+                            Register
+                        </Link>
+                    </>
+                )}
+            </div>
+        </div>
     );
 }

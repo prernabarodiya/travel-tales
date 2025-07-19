@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {connect} from "@/lib/connect";
+import { connect } from "@/lib/connect";
 import User from "@/models/user";
 
 export async function GET(req: NextRequest) {
@@ -12,7 +12,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ message: "Missing userId" }, { status: 400 });
     }
 
-    const user = await User.findById(userId).populate("stories");
+    const user = await User.findById(userId).populate({
+      path: "stories",
+      populate: {
+        path: "authorId",
+        select: "profileName email", // add any more fields you need
+      },
+    });
 
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });

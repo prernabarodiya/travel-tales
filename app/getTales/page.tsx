@@ -7,16 +7,14 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import StoryCard from "@/components/StoryCard";
 
-export default function MyStories() {
+export default function AllTales() {
   const [stories, setStories] = useState<Story[]>([]);
   const { data: session } = useSession();
 
   useEffect(() => {
     const fetchStories = async () => {
       try {
-        const res = await axios.get("/api/getMyTales", {
-          params: { userId: session?.user?.id },
-        });
+        const res = await axios.get("/api/getTales");
         setStories(res.data);
       } catch (error) {
         console.error("Error fetching stories:", error);
