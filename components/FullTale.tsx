@@ -1,7 +1,8 @@
 "use client "
 
 import Story from "@/types/story";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
 
 
 export default function FullTale({
@@ -14,7 +15,7 @@ export default function FullTale({
 
 {
 
-    // const router = useRouter()
+     const router = useRouter()
   return (
     <div
       className="fixed inset-0 flex items-center justify-center z-50 bg-black/30 backdrop-blur-md"
@@ -46,7 +47,7 @@ export default function FullTale({
         </p>
 
         <button onClick={()=>{
-            // router.push("/editTale")
+            router.push(`/EditTale/${story._id}`)
         }}>Edit </button>
       </div>
     </div>

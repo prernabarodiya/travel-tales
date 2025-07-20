@@ -1,4 +1,5 @@
 export default interface Story {
+    _id:string,
     location: string,
     details: string,
     authorId: {
