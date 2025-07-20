@@ -8,34 +8,34 @@ export default function Navbar() {
     const userNameOrEmail = session?.user?.name || session?.user?.email || "User";
 
     return (
-        <div className="bg-gray-900 shadow-md px-6 py-4 flex justify-between items-center border-b border-gray-700">
+        <div className="bg-gray-100 shadow-lg px-6 py-4 flex justify-between items-center border-b border-blue-800">
 
             {/* Brand */}
             <div>
-                <Link href="/" className="text-xl font-bold text-blue-100">
+                <Link href="/" className="text-xl font-bold text-blue-800">
                     TravelTales
                 </Link>
             </div>
 
             {/* Navigation Links */}
-            <div className="flex items-center space-x-6 text-blue-100">
-                <Link href="/" className="text-gray-100 font-medium hover:text-blue-500">
+            <div className="flex items-center space-x-6 text-blue-800">
+                <Link href="/" className="text-blue-800 font-medium hover:text-blue-500">
                     Home
                 </Link>
-                <Link href="/explore" className="text-gray-100 font-medium hover:text-blue-500">
+                <Link href="/explore" className="text-blue-800 font-medium hover:text-blue-500">
                     Explore
                 </Link>
 
                 {session ? (
                     <>
                        
-                        <Link href="/addStory" className="text-gray-100 font-medium hover:text-blue-500">
+                        <Link href="/addStory" className="text-blue-800 font-medium hover:text-blue-500">
                             Add Story
                         </Link>
-                        <Link href="/getMyTales" className="text-gray-100 font-medium hover:text-blue-500">
+                        <Link href="/getMyTales" className="text-blue-800 font-medium hover:text-blue-500">
                             Your Stories
                         </Link>
-                         <Link href="/profile" className="text-gray-100 font-medium hover:text-blue-500">
+                         <Link href="/profile" className="text-blue-800 font-medium hover:text-blue-500">
                             {userNameOrEmail}
                         </Link>
                         <button
@@ -47,10 +47,10 @@ export default function Navbar() {
                     </>
                 ) : (
                     <>
-                        <Link href="/login" className="text-gray-100 font-medium hover:text-blue-500">
+                        <Link href="/login" className="text-blue-800 font-medium hover:text-blue-500">
                             Login
                         </Link>
-                        <Link href="/register" className="text-gray-100 font-medium hover:text-blue-500">
+                        <Link href="/register" className="text-blue-800 font-medium hover:text-blue-500">
                             Register
                         </Link>
                     </>

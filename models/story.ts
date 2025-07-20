@@ -36,4 +36,9 @@ const storySchema = new Schema<IStory>(
 );
 
 const Story = models?.Story || model<IStory>("Story", storySchema);
+console.log("Story model loaded *****************************************************************************");
+
 export default Story;
+
+
+console.log("Story model loaded");

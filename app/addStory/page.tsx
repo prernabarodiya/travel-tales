@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { UploadButton } from "@/utils/uploadthing";
+import Navbar from "@/components/Navbar";
 
 export default function AddStoryForm() {
     const [location, setLocation] = useState("");
@@ -55,6 +56,8 @@ console.log("response is ",res)
 
 
     return (
+        <div>
+        <Navbar/>
         <form
             onSubmit={handleSubmit}
             className="max-w-xl mx-auto p-6 mt-8 bg-white shadow-md rounded-2xl space-y-4 text-blue-900"
@@ -130,5 +133,6 @@ console.log("response is ",res)
                 {isSubmitting ? "Submitting..." : "Submit Story"}
             </button>
         </form>
+        </div>
     );
 }
