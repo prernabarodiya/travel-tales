@@ -7,9 +7,9 @@ export async function POST(req: NextRequest) {
   try {
     await connect();
 
-    const { authorId, location, details, images } = await req.json();
+    const { authorId, location, details, images,duration } = await req.json();
 
-    if (!authorId || !location || !details || !images?.length) {
+    if (!authorId || !location || !details || !images?.length ||!duration) {
 
         console.log("here i am ",authorId," :::::  ",location,
             " :::  ",images,"  details  :: ",details
@@ -24,7 +24,8 @@ export async function POST(req: NextRequest) {
       authorId,
       location,
       details,
-      images, // this is an array of image URLs from UploadThing
+      images,
+      duration
     });
 
      await User.findByIdAndUpdate(

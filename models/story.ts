@@ -6,6 +6,7 @@ export interface IStory {
     location: string;
     images: string[];
     details: string;
+    duration?:Date;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -28,6 +29,8 @@ const storySchema = new Schema<IStory>(
         details: {
             type: String,
             required: true
+        },duration:{
+            type:Date
         }
     },
     {
@@ -36,7 +39,6 @@ const storySchema = new Schema<IStory>(
 );
 
 const Story = models?.Story || model<IStory>("Story", storySchema);
-console.log("Story model loaded *****************************************************************************");
 
 export default Story;
 

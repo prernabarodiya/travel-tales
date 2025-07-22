@@ -19,10 +19,11 @@ export default function EditTale() {
             try {
                 const res = await axios.get(`/api/getTaleById/${id}`);
                 const story = res.data.story;
-console.log("story is ",story)
-                // setDuration(new Date(story.duration));
+                console.log("story is ", story)
+                 setDuration(new Date(story.duration));
                 setLocation(story.location);
                 setDetails(story.details);
+                setImages(story.images)
             } catch (error) {
                 console.error("Error fetching story:", error);
             }
@@ -30,6 +31,28 @@ console.log("story is ",story)
 
         if (id) fetchStory();
     }, [id]);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post(`/api/editTaleById/${id}`, {
+                images,
+                location,
+                details,
+                duration,
+            });
+
+            if (res.data) {
+                alert("Tale updated successfully!");
+            } else {
+                alert("Failed to update tale.");
+            }
+        } catch (err) {
+            console.error("Error updating tale:", err);
+            alert("Error while editing the tale.");
+        }
+    };
+
 
 
     const handleImageUpload = (uploadedImages: any[]) => {
@@ -115,6 +138,7 @@ console.log("story is ",story)
                     <button
                         type="submit"
                         className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+                        onClick={handleSubmit}
                     >
                         Save Changes
                     </button>

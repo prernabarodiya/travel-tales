@@ -11,6 +11,7 @@ export default function AddStoryForm() {
     const [details, setDetails] = useState("");
     const [images, setImages] = useState<string[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+     const [duration, setDuration] = useState<Date | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const { data: session } = useSession();
@@ -31,12 +32,14 @@ export default function AddStoryForm() {
                 authorId: session?.user.id,
                 location,
                 details,
+                duration,
                 images, // already URLs
             });
 console.log("response is ",res)
             setSuccess("Story submitted successfully!");
             setLocation("");
             setDetails("");
+            setDuration(null)
             setImages([]);
         } catch (err: any) {
             console.error(err);
@@ -124,6 +127,16 @@ console.log("response is ",res)
                 )}
 
             </div>
+              <div>
+                        <label className="block font-semibold ">Duration</label>
+                        <input
+                            type="date"
+                            value={duration ? duration.toISOString().split("T")[0] : ""}
+                            onChange={(e) => setDuration(new Date(e.target.value))}
+                            className="w-full border p-2 rounded "
+                        />
+                    </div>
+
 
             <button
                 type="submit"
