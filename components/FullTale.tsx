@@ -1,9 +1,9 @@
-"use client "
+
+"use client";
 
 import Story from "@/types/story";
 import { useRouter } from "next/navigation";
-
-
+import axios from "axios";
 
 export default function FullTale({
   story,
@@ -11,22 +11,34 @@ export default function FullTale({
 }: {
   story: Story;
   onClose: () => void;
-}) 
+}) {
+  const router = useRouter();
 
-{
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete(`/api/deleteTale/${story._id}`);
+      if (res.data) {
+        alert("Tale is deleted");
+        router.refresh();
+        onClose();
+      }
+    } catch (error) {
+      console.error("Error deleting tale:", error);
+      alert("Failed to delete tale.");
+    }
+  };
 
-     const router = useRouter()
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center z-50 bg-black/30 backdrop-blur-md"
+      className="fixed inset-0 flex items-center justify-center z-50 bg-black/30"
       onClick={onClose}
     >
       <div
-        className="relative max-w-lg w-full rounded-2xl p-6 border border-white/20 bg-white/10 backdrop-blur-2xl shadow-xl text-white"
+        className="relative max-w-lg w-full rounded-2xl p-6 shadow-xl bg-gradient-to-br from-pink-100 via-pink-50 to-blue-100 text-gray-800"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="absolute top-2 right-3 text-white text-2xl hover:text-red-300 transition"
+          className="absolute top-2 right-3 text-gray-600 text-2xl hover:text-red-500 transition"
           onClick={onClose}
         >
           ×
@@ -40,15 +52,41 @@ export default function FullTale({
           />
         )}
 
-        <h2 className="text-2xl font-semibold mb-2">{story.location}</h2>
-        <p className="text-sm text-white/90 mb-4">{story.details}</p>
-        <p className="text-xs text-white/60">
-          By: {story.authorId.profileName || story.authorId.email}
-        </p>
+        <h2 className="text-2xl font-bold mb-2">{story.location}</h2>
+        <p className="text-sm mb-4">{story.details}</p>
 
-        <button onClick={()=>{
-            router.push(`/EditTale/${story._id}`)
-        }}>Edit </button>
+        {/* Author and Date */}
+        <div className="flex justify-between items-center text-xs text-gray-600 mb-4">
+          <p>
+            By: {story.authorId.profileName || story.authorId.email}
+          </p>
+          <p>
+            {story.duration
+              ? new Date(story.duration).toLocaleDateString("en-IN", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })
+              : ""}
+          </p>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-3">
+          <button
+            onClick={() => router.push(`/EditTale/${story._id}`)}
+            className="px-4 py-2 rounded-md bg-pink-500 text-white hover:bg-pink-600 transition"
+          >
+            Edit
+          </button>
+
+          <button
+            onClick={handleDelete}
+            className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

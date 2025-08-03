@@ -6,6 +6,6 @@ export default interface Story {
         profileName: string,
         email: string
     },
-
+duration:Date,
     images: string[]
 }
