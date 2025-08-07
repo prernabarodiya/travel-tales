@@ -34,7 +34,7 @@ export default function FullTale({
       onClick={onClose}
     >
       <div
-        className="relative max-w-lg w-full rounded-2xl p-6 shadow-xl bg-gradient-to-br from-pink-100 via-pink-50 to-blue-100 text-gray-800"
+        className="relative max-w-lg w-full rounded-2xl p-6 shadow-xl bg-violet-300 text-gray-800"
         onClick={(e) => e.stopPropagation()}
       >
         <button

@@ -10,7 +10,7 @@ export default function StoryCard(story: Story) {
   return (
     <>
       <div
-        className="max-w-sm rounded-2xl overflow-hidden shadow-2xl bg-gray-300  cursor-pointer"
+        className="max-w-sm rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-r from-pink-100 via-pink-50 to-blue-100  cursor-pointer"
         onClick={() => setOpen(true)}
       >
         {story.images.length > 0 && (

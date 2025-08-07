@@ -23,7 +23,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold text-pink-600">TravelTales</h1>
         <button
           onClick={handleShareClick}
-          className="px-4 py-2 bg-pink-500 text-white rounded-xl hover:bg-pink-600 transition"
+          className="px-4 py-2 bg-pink-500 text-white rounded-xl hover:bg-pink-600 transition cursor-pointer"
         >
           Share Your Tale
         </button>
@@ -38,7 +38,7 @@ export default function Home() {
           Join our community of travelers and share your adventures with the world.
         </p>
         <Link href="/explore">
-          <button className="bg-pink-500 text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-pink-600 transition">
+          <button className="bg-pink-500 text-white px-6 py-3 rounded-full text-lg shadow-lg hover:bg-pink-600 transition cursor-pointer">
             Explore Tales
           </button>
         </Link>

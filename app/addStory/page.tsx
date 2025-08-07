@@ -59,11 +59,11 @@ console.log("response is ",res)
 
 
     return (
-        <div>
+        <div className="bg-gray-200">
         <Navbar/>
         <form
             onSubmit={handleSubmit}
-            className="max-w-xl mx-auto p-6 mt-8 bg-white shadow-md rounded-2xl space-y-4 text-blue-900"
+            className="max-w-xl mx-auto p-6 mt-8 bg-white shadow-md rounded-2xl space-y-4  text-pink-700"
         >
             <h2 className="text-2xl font-semibold">Add New Travel Story</h2>
 
@@ -92,7 +92,7 @@ console.log("response is ",res)
                 />
             </div>
 
-            <div className="text-blue-900">
+            <div className="text-pink-700">
                 <label className="block font-medium mb-1">Upload Images</label>
                 <UploadButton
                     endpoint="imageUploader"

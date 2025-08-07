@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import StoryCard from "@/components/StoryCard";
+import Navbar from "@/components/Navbar";
 
 export default function MyStories() {
   const [stories, setStories] = useState<Story[]>([]);
@@ -29,13 +30,17 @@ export default function MyStories() {
   }, [session?.user?.id]);
 
   return (
-    <div className="">
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-4 ">
-      {stories?.map((story) => (
-        <StoryCard key={story.details} {...story} />
-      ))}
+   <div>
+      <Navbar />
+
+      {/* This section only gets the yellow background */}
+      <div className=" py-10 px-5 rounded-xl max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {stories.map((story) => (
+            <StoryCard key={story.details} {...story} />
+          ))}
+        </div>
+      </div>
     </div>
-    </div>
-    
   );
 }

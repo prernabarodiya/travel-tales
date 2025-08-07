@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 
 export interface IUser {
     email: string;
-
+image?:string;
     profileName: string;
     password: string;
     stories?: mongoose.Types.ObjectId[]; // Optional field
@@ -27,6 +27,10 @@ const userSchema = new Schema<IUser>(
         }, profileName: {
             type: String,
             required: false
+        },
+        image:{
+            type:String,
+            required:false
         },
         stories: [{
             type: mongoose.Schema.Types.ObjectId,

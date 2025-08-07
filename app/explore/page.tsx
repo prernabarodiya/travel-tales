@@ -19,8 +19,10 @@ export default function Explore() {
         </div>
       </div>
 
+
       {/* Tales Grid */}
-      <div className="">
+      <div className="text-black">
+        fdjfj
         <AllTales />
       </div>
     </div>
