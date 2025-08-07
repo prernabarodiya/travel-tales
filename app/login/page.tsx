@@ -1,4 +1,5 @@
 "use client";
+import Navbar from "@/components/Navbar";
 import { signIn,useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -34,8 +35,11 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-xl">
+    <div>
+
+   <Navbar/>
+    <div className="min-h-screen flex items-center justify-center  bg-gradient-to-br from-blue-100 via-white to-pink-300  px-4">
+      <div className="w-full max-w-md p-8 bg-gradient-to-r from-pink-100 via-pink-50 to-blue-100 rounded-2xl shadow-xl">
         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Login</h1>
         <form onSubmit={handleSubmit} className="space-y-4 text-red-900">
           <input
@@ -56,7 +60,7 @@ function LoginPage() {
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition duration-200"
+            className="w-full bg-pink-700 hover:bg-pink-600 text-white py-2 rounded-lg font-semibold transition duration-200 cursor-pointer"
           >
             Login
           </button>
@@ -74,7 +78,7 @@ function LoginPage() {
                       <button
                         onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
                         className="flex items-center justify-center space-x-2 w-full mt-4 rounded-xl
-                        dark:bg-gray-700 hover:bg-red-400 dark:hover:bg-gray-500 text-white"
+                       bg-pink-700 hover:bg-pink-600 text-white cursor-pointer"
                       >
                         {/* <Image
                           src="/google.svg"
@@ -82,10 +86,11 @@ function LoginPage() {
                           width={25}
                           height={25}
                         /> */}
-                        <span>Continue with Google</span>
+                        <span className="p-2">Continue with Google</span>
                       </button>
       </div>
     </div>
+     </div>
   );
 }
 

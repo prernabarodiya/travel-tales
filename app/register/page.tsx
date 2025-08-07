@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -36,8 +37,11 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+    <div>
+
+      <Navbar/>
+    <div className="flex min-h-screen items-center justify-center  bg-gradient-to-br from-blue-100 via-white to-pink-300  px-4">
+      <div className="w-full max-w-md bg-gradient-to-r from-pink-100 via-pink-50 to-blue-100 rounded-2xl shadow-xl p-8">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
           Create an Account
         </h2>
@@ -71,7 +75,7 @@ export default function RegisterPage() {
           )}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
+            className="w-full bg-pink-700 text-white py-2 rounded-lg hover:bg-pink-600 transition duration-200 cursor-pointer"
           >
             Register
           </button>
@@ -85,8 +89,8 @@ export default function RegisterPage() {
          {/* Google Auth Button */}
               <button
                 onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-                className="flex items-center justify-center space-x-2 w-full mt-4 rounded-xl
-                dark:bg-gray-700 hover:bg-red-400 dark:hover:bg-gray-500 text-white"
+                className="flex items-center justify-center space-x-2 w-full mt-4 rounded-md
+               bg-pink-700 hover:bg-pink-600 text-white cursor-pointer"
               >
                 {/* <Image
                   src="/google.svg"
@@ -94,9 +98,10 @@ export default function RegisterPage() {
                   width={25}
                   height={25}
                 /> */}
-                <span>Continue with Google</span>
+                <span className="p-2  ">Continue with Google</span>
               </button>
       </div>
+    </div>
     </div>
   );
 }
