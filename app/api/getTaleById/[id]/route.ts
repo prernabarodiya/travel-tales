@@ -2,11 +2,13 @@ import Story from "@/models/story";
 import { NextRequest, NextResponse } from "next/server";
 import {connect} from "@/lib/connect"
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+  ) {
+    const { id } = await params; 
   try {
     await connect();
-    const { id } = params;
-
+  
     const story = await Story.findById(id).populate({
       path: "authorId",
       select: "profileName email",

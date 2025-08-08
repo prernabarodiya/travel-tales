@@ -4,12 +4,13 @@ import Story from "@/models/story";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+   { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     await connect();
 
-    const { id } = params;
+   
     const { location, details, images, duration } = await req.json();
     console.log("Incoming duration:", duration);
 console.log("Parsed date:", duration ? new Date(duration) : null);
