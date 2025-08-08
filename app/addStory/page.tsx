@@ -59,11 +59,11 @@ console.log("response is ",res)
 
 
     return (
-        <div className="bg-gray-200">
+        <div className="bg-gradient-to-br from-blue-200 via-white to-pink-300">
         <Navbar/>
         <form
             onSubmit={handleSubmit}
-            className="max-w-xl mx-auto p-6 mt-8 bg-white shadow-md rounded-2xl space-y-4  text-pink-700"
+            className="max-w-xl mx-auto p-6 mt-8 bg-gradient-to-br from-pink-100 via-white to-blue-200 shadow-md rounded-2xl space-y-4  text-pink-700"
         >
             <h2 className="text-2xl font-semibold">Add New Travel Story</h2>
 

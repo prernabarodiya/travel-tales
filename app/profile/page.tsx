@@ -50,7 +50,7 @@ export default function ProfilePage() {
 
     <div>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-10 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-pink-200 py-10 px-4">
         
         <div className="max-w-4xl mx-auto bg-gradient-to-r from-pink-100 via-pink-50 to-blue-100 shadow-2xl rounded-3xl p-8">
           {/* Profile Header */}

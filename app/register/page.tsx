@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-
+import google from "@/public/google.svg"
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +29,7 @@ export default function RegisterPage() {
       });
 
       if (response.status === 200) {
-        router.push("/dashboard");
+        router.push("/explore");
       }
     } catch (err: any) {
       setError(err?.response?.data?.error || "Something went wrong");
@@ -88,16 +88,16 @@ export default function RegisterPage() {
         </p>
          {/* Google Auth Button */}
               <button
-                onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+                onClick={() => signIn("google", { callbackUrl: "/explore" })}
                 className="flex items-center justify-center space-x-2 w-full mt-4 rounded-md
                bg-pink-700 hover:bg-pink-600 text-white cursor-pointer"
               >
-                {/* <Image
-                  src="/google.svg"
-                  alt="google logomark"
-                  width={25}
-                  height={25}
-                /> */}
+                <Image
+              src={google}
+              alt="Google logomark"
+              width={25}
+              height={25}
+            />
                 <span className="p-2  ">Continue with Google</span>
               </button>
       </div>
