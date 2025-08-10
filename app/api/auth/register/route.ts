@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/lib/connect";
 import User from "@/models/user"
+import { generateUsername } from "@/lib/userNameGenerator";
 
 
 export async function POST(req: NextRequest) {
@@ -24,7 +25,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await User.create({ email, password });
+    const profileName  = await generateUsername()
+    await User.create({ email, password, profileName });
 
     return NextResponse.json(
       { message: "User registered successfully" },
