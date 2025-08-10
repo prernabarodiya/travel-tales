@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import google from "@/public/google.svg"
 import Image from "next/image";
+import { error } from "console";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -31,6 +32,7 @@ function LoginPage() {
 
     if (result?.error) {
       console.error(result.error);
+      alert(result.error)
     } else {
       router.push("/");
     }

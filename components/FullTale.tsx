@@ -4,6 +4,7 @@
 import Story from "@/types/story";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 export default function FullTale({
   story,
@@ -13,6 +14,17 @@ export default function FullTale({
   onClose: () => void;
 }) {
   const router = useRouter();
+
+  const session = useSession()
+  console.log("here we go ", session.data)
+
+
+const isAuthor =
+  session.data?.user?.email &&
+  typeof story.authorId !== "string" &&
+  story.authorId?.email === session.data.user.email;
+
+
 
   const handleDelete = async () => {
     try {
@@ -63,30 +75,32 @@ export default function FullTale({
           <p>
             {story.duration
               ? new Date(story.duration).toLocaleDateString("en-IN", {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                })
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })
               : ""}
           </p>
         </div>
 
-        {/* Buttons */}
-        <div className="flex gap-3">
-          <button
-            onClick={() => router.push(`/EditTale/${story._id}`)}
-            className="px-4 py-2 rounded-md bg-pink-500 text-white hover:bg-pink-600 transition"
-          >
-            Edit
-          </button>
+       {isAuthor && (
+  <div className="flex gap-3">
+    <button
+      onClick={() => router.push(`/EditTale/${story._id}`)}
+      className="px-4 py-2 rounded-md bg-pink-500 text-white hover:bg-pink-600 transition"
+    >
+      Edit
+    </button>
 
-          <button
-            onClick={handleDelete}
-            className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
-          >
-            Delete
-          </button>
-        </div>
+    <button
+      onClick={handleDelete}
+      className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+    >
+      Delete
+    </button>
+  </div>
+)}
+
       </div>
     </div>
   );

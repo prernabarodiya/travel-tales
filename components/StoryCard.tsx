@@ -24,7 +24,7 @@ export default function StoryCard(story: Story) {
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
             {story.location}
           </h2>
-          <p className="text-gray-600 text-sm line-clamp-3">
+          <p className="text-gray-600 text-sm line-clamp-1">
             {story.details}
           </p>
           <p className="text-gray-800 text-sm">

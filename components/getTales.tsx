@@ -24,14 +24,16 @@ export default function AllTales() {
   }, []);
 
   return (
-    <div className="">
-     
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 m-8  ">
-      {stories?.map((story) => (
-        <StoryCard key={story.details} {...story} />
-      ))}
-    </div>
-    </div>
+    <div className="m-8">
+  <div className="flex flex-wrap justify-center gap-4">
+    {stories?.map((story) => (
+      <div key={story.details} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1rem)]">
+        <StoryCard {...story} />
+      </div>
+    ))}
+  </div>
+</div>
+
     
   );
 }
